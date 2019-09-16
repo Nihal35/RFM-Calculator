@@ -10,8 +10,10 @@ import UIKit
 
 class partIIViewController: UIViewController {
     
+    //drag and drop labels and text fields from main storyboard
     
-    @IBOutlet weak var wValLabel: UILabel!
+    
+    @IBOutlet weak var wValLabel: UILabel!     
     @IBOutlet weak var hValLabel: UILabel!
     
     @IBOutlet weak var hLabel: UILabel!
@@ -32,42 +34,42 @@ class partIIViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    @IBAction func getHeightSliderVal(_ sender: Any) {
+    @IBAction func getHeightSliderVal(_ sender: Any) {   //gets height slider value and updates as user moves it
         
        heightSliderVal = self.heightSlider.value
        heightSliderVal.round()
        self.hValLabel.text = String(heightSliderVal)
     }
     
-    @IBAction func getWaistSliderVal(_ sender: Any) {
+    @IBAction func getWaistSliderVal(_ sender: Any) {   //gets waist slider value and updates as user moves it
         waistSliderVal = self.waistSlider.value
         waistSliderVal.round()
         self.wValLabel.text = String(waistSliderVal)
     }
     
     
-    @IBAction func getGenderSeg(_ sender: Any) {
+    @IBAction func getGenderSeg(_ sender: Any) {        //gets gender value from segemented controller. 0 = female and 1 = male
         
        var genderSegVal = self.genderSeg.selectedSegmentIndex
        self.rfmnum2Label.text = String(genderSegVal)
         
         var rfmPT1 = Float()
         
-        if(genderSegVal == 0){
+        if(genderSegVal == 0){                           //formula for a female's RFM
             rfmPT1 = heightSlider.value/waistSlider.value
             RFM = Double((64-(20*(rfmPT1)))+12)
         }
-        else if(genderSegVal ==  1){
+        else if(genderSegVal ==  1){                    //formula for a male's RFM
             RFM = Double((64-(20*(heightSlider.value/waistSlider.value))))
         }
         else{
             RFM = 0.0
         }
-        rfmnum2Label.text = String(format: "%.2f", RFM)
+        rfmnum2Label.text = String(format: "%.2f", RFM) 
         
-        if(genderSegVal == 1){
+        if(genderSegVal == 1){                         //prints out user's fat mass category based on input
             if(RFM <= 11){
-                healthy2Label.text = "Underfat"
+                healthy2Label.text = "Underfat"        //for males
                 healthy2Label.textColor = UIColor.blue
             }
             else if (RFM > 11 && RFM <= 22){
@@ -83,7 +85,7 @@ class partIIViewController: UIViewController {
                 healthy2Label.textColor = UIColor.red
             }
         }
-        else if (genderSegVal == 0){
+        else if (genderSegVal == 0){              //for females
             if(RFM <= 23){
                 healthy2Label.text = "Underfat"
                 healthy2Label.textColor = UIColor.blue
@@ -102,56 +104,4 @@ class partIIViewController: UIViewController {
             }
         }
     }
-    /*
-     var RFM = Double()
-     
-     if(genderText == "M"){
-     RFM = 64-(20*(h/w))
-     }
-     else if(genderText == "F"){
-     RFM = (64-(20*(h/w))+(12))
-     }
-     else{
-     RFM = 0.0
-     }
-     
-     rfmnumLabel.text = String(RFM)
-     
-     if(genderText == "M"){
-     if(RFM <= 11){
-     healthyLabel.text = "Underfat"
-     healthyLabel.textColor = UIColor.blue
-     }
-     else if (RFM > 11 && RFM <= 22){
-     healthyLabel.text = "Healthy"
-     healthyLabel.textColor = UIColor.green
-     }
-     else if (RFM > 22 && RFM <= 28){
-     healthyLabel.text = "Overfat"
-     healthyLabel.textColor = UIColor.yellow
-     }
-     else if (RFM > 28){
-     healthyLabel.text = "Obese"
-     healthyLabel.textColor = UIColor.red
-     }
-     }
-     else if (genderText == "F"){
-     if(RFM <= 23){
-     healthyLabel.text = "Underfat"
-     healthyLabel.textColor = UIColor.blue
-     }
-     else if (RFM > 23 && RFM <= 35){
-     healthyLabel.text = "Healthy"
-     healthyLabel.textColor = UIColor.green
-     }
-     else if (RFM > 35 && RFM <= 40 ){
-     healthyLabel.text = "Overfat"
-     healthyLabel.textColor = UIColor.yellow
-     }
-     else if (RFM > 40){
-     healthyLabel.text = "Obese"
-     healthyLabel.textColor = UIColor.red
-     }
-     }
-  */
 }

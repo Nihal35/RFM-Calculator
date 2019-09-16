@@ -11,6 +11,8 @@ import UIKit
 class partIViewController: UIViewController {
 
     
+    //drag and drop from main storyboard
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var heightLabel: UILabel!
     @IBOutlet weak var heightTF: UITextField!
@@ -38,18 +40,18 @@ class partIViewController: UIViewController {
     }
     
 
-    @IBAction func calcRFMbutton(_ sender: Any) {
-        
+    @IBAction func calcRFMbutton(_ sender: Any) {    //calculates RFM when button is clicked by having two formulas. One for males,                                                 //one for F
+                                                     //one for females
         let h = Double(heightTF.text!) ?? 0
         let w = Double(waistTF.text!) ?? 1
         genderText = genderTF.text!
         
         var RFM = Double()
         
-        if(genderText == "M"){
+        if(genderText == "M"){     //male formula
            RFM = 64-(20*(h/w))
         }
-        else if(genderText == "F"){
+        else if(genderText == "F"){   //female formula
             RFM = (64-(20*(h/w))+(12))
         }
         else{
@@ -58,7 +60,7 @@ class partIViewController: UIViewController {
         
        rfmnumLabel.text = String(format: "%.f", RFM)
         
-        if(genderText == "M"){
+        if(genderText == "M"){              //rfm categories based on output from the user-entered inputs using the formulas
             if(RFM <= 11){
                 healthyLabel.text = "Underfat"
                 healthyLabel.textColor = UIColor.blue
